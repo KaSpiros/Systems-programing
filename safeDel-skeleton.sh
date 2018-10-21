@@ -1,12 +1,25 @@
 #! /bin/bash
 USAGE="usage: $0 <fill in correct usage>" 
+DIR=~/.trashCan
+mkdir ~/.trashCan;
+clear;
 
-mkdir ~/.trashCan
+lit () {
+
+for filename in $DIR/*; do
+  LISTFILES=$(wc -c < $filename)
+  FILE=$(basename $filename)
+  TYPE=$(file -b $filename)
+printf  "File: %s\t Size: %s\tType: %s\t \n" "$FILE" "$LISTFILES" "$TYPE";
+
+
+done
+}
 
 while getopts :lr:dtmk args #options
 do
   case $args in
-     l) ls;;
+     l) lit;;
      r) echo "r option; data: $OPTARG";;
      d) echo "d option";; 
      t) echo "t option";; 
@@ -26,7 +39,7 @@ if (( $# == 0 ))
 then if (( $OPTIND == 1 )) 
  then select menu_list in list recover delete total watch kill exit
       do case $menu_list in
-         "list") ls -l;;
+         "list") lit;;
          "recover") echo "r";;
          "delete") echo "d";;
          "total") echo "t";;
