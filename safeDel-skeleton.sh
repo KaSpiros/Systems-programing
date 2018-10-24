@@ -4,9 +4,6 @@ DIR=~/.trashCan;
 mkdir ~/.trashCan;
 clear;
 
-
-
-
 lit () {
 for filename in $DIR/*; do
   LISTFILES=$(wc -c < $filename)
