@@ -61,7 +61,7 @@ done
 echo "Following Script was created by:"
 echo "Spyridon Kalogeropoulos";
 echo "S1632672";
-sleep 5;
+sleep 4;
 clear;
 
 ((pos = OPTIND - 1))
