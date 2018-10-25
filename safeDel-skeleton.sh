@@ -1,8 +1,14 @@
 #! /bin/bash
-USAGE="usage: $0 <Please select one of the following options>" 
+USAGE="usage: $0 <fill in usage>" 
 DIR=~/.trashCan;
 mkdir ~/.trashCan;
 clear;
+echo "Following Script was created by:"
+echo "Spyridon Kalogeropoulos";
+echo "S1632672";
+sleep 4;
+clear;
+
 
 lit () {
 for filename in $DIR/*; do
@@ -51,18 +57,12 @@ do
      r) recover2;;
      d) remove;; 
      t) total;; 
-     w) echo "m option";; 
+     m) echo "m option";; 
      k) echo "k option";;     
      :) echo "data missing, option -$OPTARG";;
     \?) echo "$USAGE";;
   esac
 done
-
-echo "Following Script was created by:"
-echo "Spyridon Kalogeropoulos";
-echo "S1632672";
-sleep 4;
-clear;
 
 ((pos = OPTIND - 1))
 shift $pos
@@ -71,13 +71,13 @@ PS3='option> '
 
 if (( $# == 0 ))
 then if (( $OPTIND == 1 )) 
- then select menu_list in list recover delete total watch kill exit
+ then select menu_list in list recover delete total monitor kill exit
       do case $menu_list in
          "list") lit;;
          "recover") recover;;
          "delete") remove;;
          "total") total;;
-         "monitor") echo "w";;
+         "monitor") echo "m";;
          "kill") echo "k";;
          "exit") exit 0;;
          *) echo "unknown option";;
