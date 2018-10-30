@@ -48,6 +48,10 @@ total () {
  du -hc $DIR
 }
 
+monitor () {
+./monitor 
+}
+
 
 
 while getopts :lr:dtmk args #options
@@ -57,7 +61,7 @@ do
      r) recover2;;
      d) remove;; 
      t) total;; 
-     m) echo "m option";; 
+     m) monitor;; 
      k) echo "k option";;     
      :) echo "data missing, option -$OPTARG";;
     \?) echo "$USAGE";;
@@ -77,7 +81,7 @@ then if (( $OPTIND == 1 ))
          "recover") recover;;
          "delete") remove;;
          "total") total;;
-         "monitor") echo "m";;
+         "monitor") monitor;;
          "kill") echo "k";;
          "exit") exit 0;;
          *) echo "unknown option";;
