@@ -1,8 +1,8 @@
 #! /bin/bash
 USAGE="usage: $0 <fill in usage>" 
-DIR=~/.trashCan;  # Assigns the path to TrashCan to a variable
-mkdir ~/.trashCan; # Creates the trasCan direcotry
-touch ~/.trashCan/.monitorText; # creates a file called monitorText inside the TrashCan
+DIR=~/.trashCan;  
+mkdir ~/.trashCan; 
+touch ~/.trashCan/.monitorText; 
 clear; 
 echo "Following Script was created by:"
 echo "Spyridon Kalogeropoulos";
@@ -10,7 +10,7 @@ echo "S1632672";
 sleep 1.5;
 clear;
 
-safeDel () # moves file or files into the trahCan Dir using the command [./safeDel.sh file file1 file2]
+safeDel () 
 {
 for filename in "$@"; do
 mv "$filename" $DIR;
@@ -19,21 +19,21 @@ echo "$filename has successfully been moved to TrashCan!" >> ~/.trashCan/.monito
 done
 }
 
-list () {  #lists all none hiden files in the Trash can Directory and prints in the format of FILENAME-FILESIZE-FILETYPE
-if [ "$(ls $DIR)" ]; then # checks is trashCan is empty
-    for filename in $DIR/* ; do # initiates a loop
+lit () { 
+if [ "$(ls $DIR)" ]; then
+    for filename in $DIR/* ; do
   LISTFILES=$(du -sb < $filename);
   FILE=$(basename $filename);
   TYPE=$(file -b $filename);
 printf  "File: %s\t Size: %s\t Type: %s\t \n" "$FILE" "$LISTFILES" "$TYPE";
-done # end of loop
+done
 else
     echo "Trashcan Directory is Empty"
-fi # end of 'if'
+fi
 
 }
 
-recover () { # Recovers a file from the TrashCan into the Present Working Directory
+recover () {
   echo "Please specify the file you would like to recover"
   read name
   if [ -f ~/.trashCan/$name ]; then
@@ -44,7 +44,7 @@ recover () { # Recovers a file from the TrashCan into the Present Working Direct
      echo "File $name was not found"
      fi
 }
-recover2 () { # Same method as above but instead takes an OPTARG argument thus can be used without going through the menu but with a single command
+recover2 () {
 if [ -f ~/.trashCan/$OPTARG ]; then
      mv ~/.trashCan/$OPTARG .
      echo "File $OPTARG has been recovered"
@@ -54,7 +54,7 @@ if [ -f ~/.trashCan/$OPTARG ]; then
      fi
 }
 
-remove () { # Iterates through all the none hidden files in the trashCan directory and promts the user to answer Y/N if he wants to Delete them
+remove () {
   for filename in $DIR/*; do
     echo "do you wish to delete this file : $(basename $filename )";
     read yn;
@@ -69,22 +69,22 @@ done
 
 }
 
-total () { #Displays the total trashCan size
+total () {
   echo "TrashCan size"
   echo "-------------"
  du -sb $DIR
 
 }
 
-monitor () { # Opens a new terminal window and starts the monitor script while keeping current monitor window open
+monitor () {
 xfce4-terminal -e ./monitor.sh &
 }
 
-monitor_kill () { # Closes the monitoring process
+monitor_kill () {
   pkill monitor.sh;
   #pkill -n bash;
 }
-MainTrap () { # A trap method which 1. prints the amount of regular files in the Directory 2. Prints a warning if the trashCan size exceeds 1kb
+MainTrap () {
   SIZE=$(du -s $DIR | awk '{print $1}');
   
   cd $DIR
@@ -100,12 +100,12 @@ MainTrap () { # A trap method which 1. prints the amount of regular files in the
   exit 0;
 }
 
-trap MainTrap EXIT SIGINT SIGTERM # Initiates the trap
+trap MainTrap EXIT SIGINT SIGTERM
 
-while getopts :lr:dtmk args #options | Menu options
+while getopts :lr:dtmk args #options
 do
   case $args in
-     l) list;;
+     l) lit;;
      r) recover2;;
      d) remove;; 
      t) total;; 
@@ -121,11 +121,11 @@ shift $pos
 
 PS3='option> '
 
-if (( $# == 0 )) # command line options
+if (( $# == 0 ))
 then if (( $OPTIND == 1 )) 
  then select menu_list in list recover delete total monitor kill exit
       do case $menu_list in
-         "list") list;;
+         "list") lit;;
          "recover") recover;;
          "delete") remove;;
          "total") total;;
