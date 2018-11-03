@@ -1,17 +1,9 @@
-while [true] 
-do
-cd ~/.trashCan
-md5sum * > .file1
-if (! diff -rq .file1 .file2); then
-{
-clear
-echo "Changes were detected" >> .file3
-comm -3 <(sort .file1) <(sort .file2) | awk '{ printf "%s\n", $filename }' >> .file3
-cat .file1 > .file2
-}
-else echo "No changes were made in the Trash Can for the past 15 secs" >> .file3
-fi
+#! /bin/bash
+echo "Following Script was created by:"
+echo "Spyridon Kalogeropoulos";
+echo "S1632672";
+while true; do 
+echo "Below are the changes in the past 15 Seconds"
+echo "$(< ~/.trashCan/.monitorText)";
 sleep 15;
-clear
-cat  ~/.trashCan/.file3
 done
