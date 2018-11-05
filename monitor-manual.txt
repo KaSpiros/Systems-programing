@@ -1,0 +1,13 @@
+.\" Manpage for Monitor.
+.\" Contact skalog200@caledonian.ac.uk to correct errors or typos.
+.TH man 8 "Mon 5 Nov 2018" "1.1" "Monitor man page"
+.SH NAME
+Monitor \-is a tool to monitor a directory for any changes. system 
+.SH SYNOPSIS
+./monitor
+.SH DESCRIPTION
+Linux does not provide a tool to monitor a directory for any changes, so I created a script which prints out any changes that happen in that directory.
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Spyridon Kalogeropoulos (skalog200@Caledonian.ac.uk).
